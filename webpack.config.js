@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
     entry: './src/index.js',
@@ -12,13 +13,29 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                ],
+                test: /\.jpe?g$|\.gif$|\.png$|\.PNG$|\.svg$|\.woff(2)?$|\.ttf$|\.eot$/,
+                loader: 'file-loader',
+                options: {
+                    name: '/img/[name].[ext]'
+                }
             },
+            {
+                test: /\.s(a|c)ss$/,
+                loader: [
+                    isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: isDevelopment
+                        }
+                    }
+                ]
+            }
         ],
+    },
+    resolve: {
+        extensions: ['.js','.scss']
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -27,7 +44,10 @@ module.exports = {
             inject: true,
             filename: 'index.html'
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+          filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+          chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
