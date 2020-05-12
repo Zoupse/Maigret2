@@ -24,7 +24,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/EasyPHP-Devserver-17/eds-www/LICENCE/tp-si" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -36,11 +36,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588659051059</updated>
-      <workItem from="1588659053453" duration="2418000" />
+      <workItem from="1588659053453" duration="3997000" />
+      <workItem from="1589177039793" duration="626000" />
+      <workItem from="1589185554769" duration="763000" />
+      <workItem from="1589286885168" duration="2545000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1180" y="295" key="FileChooserDialogImpl" timestamp="1589186019159">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1180" y="295" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589186019159" />
+    <state x="-1284" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1589185554795">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1284" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1589185554795" />
+    <state x="636" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1589177041438" />
   </component>
 </project>
