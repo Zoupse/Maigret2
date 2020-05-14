@@ -2,11 +2,11 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
     entry: './src/index.js',
     output: {
+        publicPath: '/',
         filename: '[name].[contentHash].js',
         path: path.resolve(__dirname, 'dist'),
     },
@@ -16,19 +16,17 @@ module.exports = {
                 test: /\.jpe?g$|\.gif$|\.png$|\.PNG$|\.svg$|\.woff(2)?$|\.ttf$|\.eot$/,
                 loader: 'file-loader',
                 options: {
-                    name: '/img/[name].[ext]'
+                    name: '[name].[ext]',
+                    outputPath: 'img/'
                 }
             },
             {
                 test: /\.s(a|c)ss$/,
                 loader: [
-                    isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: 'sass-loader',
-                        options: {
-                            sourceMap: isDevelopment
-                        }
                     }
                 ]
             }
@@ -45,11 +43,11 @@ module.exports = {
             filename: 'index.html'
         }),
         new MiniCssExtractPlugin({
-          filename: isDevelopment ? '[name].css' : '[name].[hash].css',
-          chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+          filename: '[name].[hash].css',
+          chunkFilename: '[id].[hash].css'
         })
     ],
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'dist')
     }
 };
