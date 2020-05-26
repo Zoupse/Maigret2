@@ -9,11 +9,16 @@ function importAll(r) {
 const images = importAll(require.context('./img', false, /\.(png|jpe?g|svg)$/));
 
 
+//////////////////
+/// define const
 
-/// custom
+//known user data
 const username = 'user';
 const password = 'password';
 
+
+//////////////////
+/// various functions
 
 const onLoginFormSubmit = e => {
     e.preventDefault(); // Annule l'action par défaut
@@ -58,19 +63,66 @@ const movelabel = obj => {
     }
 }
 
-//slide
 
+//slide
 let translate = 0;
 let current = 1;
+
 const slide = (move, step) => {
+
+    //move all
     translate += move;
     document.querySelectorAll('main > div').forEach((el) => {
         el.style.transform = "translatex("+translate+"%)";
     });
 
+    //find current
     current += step;
     document.querySelector('main > .current').classList.remove("current");
-    document.querySelector('main >div:nth-child('+current+')').classList.add("current");
+
+    let currentel = document.querySelector('main >div:nth-child('+current+')');
+    currentel.classList.add("current");
+
+    //navbar
+    if (currentel.classList.contains('login')){
+        document.querySelector("nav").classList.remove('show');
+    }
+    else {
+        document.querySelector("nav").classList.add('show');
+    }
+
+    //aside
+    if (currentel.classList.contains('signup')){
+        document.querySelector("aside").classList.add('show');
+
+        let i = currentel.id.match(/\d+/)[0];
+        document.querySelector('aside > .current').classList.remove('current');
+        document.querySelector('aside > a:nth-child('+i+')').classList.add('current');
+    }
+    else {
+        document.querySelector("nav").classList.remove('show');
+    }
+}
+
+const slideaside = childnb => {
+
+    //use node index of clicked point to find the right element
+    let el = document.querySelector('main >div#step'+childnb);
+
+    // then find node index of this element (important if we want to add steps without changing script)
+    let node = el;
+    let i = 0;
+    while( (node = node.previousElementSibling) != null ) {
+        i++;
+    }
+
+    //use this index to define the slider translate
+    translate = parseInt("-"+i+"00");
+    current =  i + 1;
+
+    //then operate the slide with above function
+    slide(0,0);
+
 }
 
 
@@ -104,9 +156,23 @@ document.querySelectorAll('.previous').forEach((obj)=>{
         slide(+100, -1);
     });
 });
+
 //next
 document.querySelectorAll('.next').forEach((obj)=>{
     obj.addEventListener('click',()=>{
         slide(-100, +1);
+    });
+});
+
+//aside
+document.querySelectorAll('aside > a').forEach((obj)=>{
+    obj.addEventListener('click',()=>{
+        //find node index
+        let node = obj;
+        let i = 1;
+        while( (node = node.previousElementSibling) != null ) {
+            i++;
+        }
+        slideaside(i);
     });
 });

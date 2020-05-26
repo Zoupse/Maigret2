@@ -3,7 +3,7 @@ $blue-color: #007ec3;
 
 body {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
   color: $white-color;
@@ -17,6 +17,53 @@ body {
     box-sizing: border-box;
   }
 
+  h1, h2 {
+    font-family: 'Bad Script', cursive;
+    font-size: 40px;
+    font-weight: lighter;
+  }
+
+  a {
+    color: $white-color;
+    text-decoration: none;
+  }
+  picture{
+    display: inline-block;
+    img {
+      width: 100%;
+    }
+  }
+
+
+  nav {
+    transition: 0.4s ease-in-out;
+    transform: translateY(-100%);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    .container {
+      position: relative;
+      text-align: center;
+        picture {
+        width: 80px;
+      }
+      .back {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+     }
+    &.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+
   main {
     width: 100%;
     max-width: 350px;
@@ -24,6 +71,7 @@ body {
     overflow: hidden;
     position: relative;
     display: flex;
+    align-items: center;
 
     > div {
       min-width: 100%;
@@ -34,16 +82,14 @@ body {
       &.current {
         opacity: 1;
       }
-
-      h1, h2 {
-        font-family: 'Bad Script', cursive;
-        font-size: 40px;
-        font-weight: lighter;
+      &.login {
+        picture {
+          width: 140px;
+        }
       }
 
-      a {
-        color: $white-color;
-        text-decoration: none;
+      h2, h1 {
+        margin: 0 -40px 20px -40px;
       }
 
       form {
@@ -66,7 +112,7 @@ body {
             pointer-events: none;
           }
 
-          input[type=text], input[type=password], input[type=email], input[type=date] {
+          input {
             width: 100%;
 
             &:focus, &.filled {
@@ -86,7 +132,7 @@ body {
           }
         }
 
-        input[type=text], input[type=password], input[type=email], input[type=date], textarea {
+        input, textarea {
           background: none;
           border: 1px solid $white-color;
           padding: 10px 15px;
@@ -140,5 +186,31 @@ body {
       position: static;
     }
 
+  }
+
+
+  aside {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(200px);
+    display: none;
+    a {
+      background: $white-color;
+      width: 10px;
+      height: 10px;
+      display: block;
+      border-radius: 100%;
+      &:not(:last-child){
+        margin-bottom: 10px;
+      }
+      &.current {
+        opacity: 0.5;
+        cursor: unset;
+      }
+    }
+    &.show {
+      display: block;
+    }
   }
 }
