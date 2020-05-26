@@ -48,11 +48,45 @@ const changePasswordView = obj => {
    }
 }
 
+//label click
+const movelabel = obj => {
+    if(obj.value !== "") {
+        obj.classList.add("filled");
+    }
+    else {
+        obj.classList.remove("filled");
+    }
+}
+
+//slide
+
+let translate = 0;
+let current = 1;
+const slide = (move, step) => {
+    translate += move;
+    document.querySelectorAll('main > div').forEach((el) => {
+        el.style.transform = "translatex("+translate+"%)";
+    });
+
+    current += step;
+    document.querySelector('main > .current').classList.remove("current");
+    document.querySelector('main >div:nth-child('+current+')').classList.add("current");
+}
+
+
 ///////////////////////
 //events événements
 
 //submit
 document.querySelector('#loginForm').addEventListener('submit',onLoginFormSubmit);
+
+//label
+document.querySelectorAll('.input-container input').forEach((obj)=>{
+    obj.addEventListener('focusout',()=>{
+        movelabel(obj);
+    });
+    movelabel(obj); // for page load
+});
 
 //view password
 document.querySelectorAll('.view-button').forEach((obj)=>{
@@ -61,5 +95,18 @@ document.querySelectorAll('.view-button').forEach((obj)=>{
     });
     obj.addEventListener('mouseup',()=>{
         changePasswordView(obj);
+    });
+});
+
+//previous
+document.querySelectorAll('.previous').forEach((obj)=>{
+    obj.addEventListener('click',()=>{
+        slide(+100, -1);
+    });
+});
+//next
+document.querySelectorAll('.next').forEach((obj)=>{
+    obj.addEventListener('click',()=>{
+        slide(-100, +1);
     });
 });
