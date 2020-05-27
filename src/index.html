@@ -20,98 +20,108 @@
     </div>
 </nav>
 <main>
-    <div class="login current">
-        <picture>
-            <img src="/img/logo.png" alt="Logo">
-        </picture>
-        <h1>Want juice ?</h1>
-        <form id="loginForm">
-            <div class="input-container">
-                <input required name="username" id="username" >
-                <label for="username">Username or email</label>
+    <div class="slider-container">
+        <div id="alert"></div>
+        <div class="slider">
+            <div class="logged">
+                <picture>
+                    <img src="/img/logo.png" alt="Logo">
+                </picture>
+                <h1>Welcome back !</h1>
             </div>
-            <div class="input-container">
-                <button type="button" class="view-button"></button>
-                <input required name="password" id="password" type="password">
-                <label for="password">Password</label>
-            </div>
-            <a href="#" title="Change your password" class="previous">
-                Forgot password ?
-            </a>
+            <div class="login current">
+                <picture>
+                    <img src="/img/logo.png" alt="Logo">
+                </picture>
+                <h1>Want juice ?</h1>
+                <form action="javascript:void(0);" id="loginForm">
+                    <div class="input-container">
+                        <input required name="username" id="username" >
+                        <label for="username">Username or email</label>
+                    </div>
+                    <div class="input-container">
+                        <input required name="password" id="password" type="password">
+                        <label for="password">Password</label>
+                        <button type="button" class="view-button"></button>
+                    </div>
+                    <a href="#" title="Change your password" class="previous">
+                        Forgot password ?
+                    </a>
 
-            <button type="submit">
-                Login
-            </button>
-            <a href="#" title="Create account" class="next">
-                No account ?
-            </a>
-        </form>
-    </div>
-    <div id="step1" class="signup" >
-        <h2>Join us !</h2>
-        <form id="signup1">
-            <div class="input-container">
-                <input required name="email" id="email" type="email">
-                <label for="email">Email</label>
+                    <button type="submit">
+                        Login
+                    </button>
+                    <a href="#" title="Create account" class="next">
+                        No account ?
+                    </a>
+                </form>
             </div>
-            <div class="input-container">
-                <button type="button" class="view-button"></button>
-                <input required name="password" id="sign-password" type="password">
-                <label for="sign-password">Password</label>
-            </div>
+            <div id="step1" class="signup" >
+                <h2>Join us !</h2>
+                <form action="javascript:void(0);" id="signup1">
+                    <div class="input-container">
+                        <input required name="email" id="email" type="email">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-container">
+                        <input required name="password" id="sign-password" type="password">
+                        <label for="sign-password">Password</label>
+                        <button type="button" class="view-button"></button>
+                    </div>
 
-            <div class="input-container">
-                <button type="button" class="view-button"></button>
-                <input required name="password-2" id="sign-password-2" type="password">
-                <label for="sign-password-2">Repeat password</label>
-            </div>
+                    <div class="input-container">
+                        <input required name="password-2" id="sign-password-2" type="password">
+                        <label for="sign-password-2">Repeat password</label>
+                        <button type="button" class="view-button"></button>
+                    </div>
 
-            <button type="submit" title="Next step" class="next">
-                Next
-            </button>
-        </form>
-    </div>
-    <div id="step2" class="signup">
-        <h2>What's your name ?</h2>
-        <form id="signup2">
-            <div class="input-container">
-                <input required name="sign-username" id="sign-username" >
-                <label for="sign-username">Username</label>
+                    <button type="submit" title="Next step" class="next">
+                        Next
+                    </button>
+                </form>
             </div>
-            <div class="input-container">
-                <input name="first-name" id="first-name" >
-                <label for="first-name">Password</label>
-            </div>
-            <div class="input-container">
-                <input name="last-name" id="last-name" >
-                <label for="last-name">Last name</label>
-            </div>
-            <button title="Previous step" class="previous">
-                Previous
-            </button>
+            <div id="step2" class="signup">
+                <h2>What's your name ?</h2>
+                <form action="javascript:void(0);" id="signup2">
+                    <div class="input-container">
+                        <input required name="sign-username" id="sign-username" >
+                        <label for="sign-username">Username</label>
+                    </div>
+                    <div class="input-container">
+                        <input name="first-name" id="first-name" >
+                        <label for="first-name">First name</label>
+                    </div>
+                    <div class="input-container">
+                        <input name="last-name" id="last-name" >
+                        <label for="last-name">Last name</label>
+                    </div>
+                    <a title="Previous step" class="previous btn">
+                        Previous
+                    </a>
 
-            <button type="submit" title="Next step" class="next">
-                Next
-            </button>
-        </form>
-    </div>
-    <div id="step3" class="signup" >
-        <h2>More about you</h2>
-        <form id="signup3">
-            <div class="input-container">
-                <input name="birthdate" id="birthdate" type="date">
-                <label for="birthdate">Birthdate</label>
+                    <button type="submit" title="Next step" class="next">
+                        Next
+                    </button>
+                </form>
             </div>
-            <textarea placeholder="Some words about your favorite juice...">
-            </textarea>
-            <button title="Previous step" class="previous">
-                Previous
-            </button>
+            <div id="step3" class="signup" >
+                <h2>More about you</h2>
+                <form action="javascript:void(0);" id="signup3">
+                    <div class="input-container">
+                        <input name="birthdate" id="birthdate" type="date">
+                        <label for="birthdate">Birthdate</label>
+                    </div>
+                    <textarea>Some words about your favorite juice...</textarea>
+                    <a title="Previous step" class="previous btn">
+                        Previous
+                    </a>
 
-            <button type="submit" title="Create your account">
-                Sign up
-            </button>
-        </form>
+                    <button type="submit" title="Create your account">
+                        Sign up
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </main>
 <aside>

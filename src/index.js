@@ -9,6 +9,7 @@ function importAll(r) {
 const images = importAll(require.context('./img', false, /\.(png|jpe?g|svg)$/));
 
 
+
 //////////////////
 /// define const
 
@@ -16,39 +17,67 @@ const images = importAll(require.context('./img', false, /\.(png|jpe?g|svg)$/));
 const username = 'user';
 const password = 'password';
 
+//alert
+const alert = document.querySelector("#alert");
+
+//time
+const loadtime = 800;
+
 
 //////////////////
 /// various functions
 
-const onLoginFormSubmit = e => {
+const onFormSubmit = e => {
     e.preventDefault(); // Annule l'action par défaut
+
+    let id = e.target.id;
+
 
     setTimeout(() => {
         // Récupère les données du formulaire
         const data = new FormData(e.target);
-        const response = processDataForm(data);
-    }, 1000); // 1 seconde
+        const response = processDataForm(data, id);
+    }, loadtime); // 1 seconde
 }
 
 //verif login
-const processDataForm = data => {
-    if (data.get('password') !== password || data.get('username') !== username) {
-        console.log("False")
+const processDataForm = (data, id) => {
+
+    switch (id) {
+        case 'loginForm':
+            if (data.get('password') !== password || data.get('username') !== username) {
+                alert.innerHTML = "Wrong username or password";
+                alert.classList.add("show");
+                console.log("False");
+            }
+            else {
+                alert.classList.remove("show");
+                slide(+100, -1);
+            }
+            break;
+        case 'signup1':
+            if (data.get('password') !== data.get('password-2')) {
+                alert.innerHTML = "Password fields are not the same";
+                alert.classList.add("show");
+            }
+            else {
+                alert.classList.remove("show");
+            }
+            break;
     }
-    else {
-        console.log("Success");
-    }
+
 }
 
 //view password
 const changePasswordView = obj => {
-   let type = obj.nextElementSibling.getAttribute("type");
+    let el = obj.previousElementSibling.previousElementSibling;
+   let type = el.getAttribute("type");
    switch (type) {
        case "password" :
-           obj.nextElementSibling.setAttribute("type", "text");
+          el.setAttribute("type", "text");
            break;
        case "text" :
-           obj.nextElementSibling.setAttribute("type", "password");
+           el.setAttribute("type", "password");
            break;
    }
 }
@@ -65,23 +94,25 @@ const movelabel = obj => {
 
 
 //slide
-let translate = 0;
-let current = 1;
+let translate = -100; //translate to view the first wanted slide
+let current = 2; //nth child of the first wanted slide
 
 const slide = (move, step) => {
 
     //move all
     translate += move;
-    document.querySelectorAll('main > div').forEach((el) => {
+    document.querySelectorAll('.slider > div').forEach((el) => {
         el.style.transform = "translatex("+translate+"%)";
     });
 
     //find current
     current += step;
-    document.querySelector('main > .current').classList.remove("current");
+    document.querySelector('.slider > .current').classList.remove("current");
 
-    let currentel = document.querySelector('main >div:nth-child('+current+')');
+    let currentel = document.querySelector('.slider >div:nth-child('+current+')');
     currentel.classList.add("current");
+
+    console.log(currentel);
 
     //navbar
     if (currentel.classList.contains('login')){
@@ -89,6 +120,8 @@ const slide = (move, step) => {
     }
     else {
         document.querySelector("nav").classList.add('show');
+        //console.log("ok");
+       // console.log(document.querySelector("nav"));
     }
 
     //aside
@@ -107,7 +140,7 @@ const slide = (move, step) => {
 const slideaside = childnb => {
 
     //use node index of clicked point to find the right element
-    let el = document.querySelector('main >div#step'+childnb);
+    let el = document.querySelector('.slider >div#step'+childnb);
 
     // then find node index of this element (important if we want to add steps without changing script)
     let node = el;
@@ -130,7 +163,9 @@ const slideaside = childnb => {
 //events événements
 
 //submit
-document.querySelector('#loginForm').addEventListener('submit',onLoginFormSubmit);
+document.querySelectorAll('form').forEach((obj)=>{
+    obj.addEventListener('submit',onFormSubmit);
+});
 
 //label
 document.querySelectorAll('.input-container input').forEach((obj)=>{
@@ -152,7 +187,8 @@ document.querySelectorAll('.view-button').forEach((obj)=>{
 
 //previous
 document.querySelectorAll('.previous').forEach((obj)=>{
-    obj.addEventListener('click',()=>{
+    obj.addEventListener('click',(e)=>{
+        e.preventDefault();
         slide(+100, -1);
     });
 });
@@ -160,7 +196,19 @@ document.querySelectorAll('.previous').forEach((obj)=>{
 //next
 document.querySelectorAll('.next').forEach((obj)=>{
     obj.addEventListener('click',()=>{
-        slide(-100, +1);
+        if(obj.type == "submit") {
+            setTimeout(() => {
+                if(!obj.parentElement.querySelector("input:invalid") && !alert.classList.contains("show")) {
+                    slide(-100, +1);
+                }
+                else {
+                    console.log("invalid input");
+                }
+            }, loadtime + 1);
+        }
+        else {
+            slide(-100, +1);
+        }
     });
 });
 
