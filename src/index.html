@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width">
+    <meta name="description" content="A website for people who like to drink various juices. But remember this: orange juice is the best.">
     <title>Want juice ?</title>
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav>
     <div class="container">
-        <a href="#" title="Back" class="back">
-            Go back
-        </a>
         <a href="/">
             <picture>
                 <img src="/img/logo.png" alt="Logo">
@@ -29,6 +27,24 @@
                 </picture>
                 <h1>Welcome back !</h1>
             </div>
+            <div class="passchange">
+                <h2>
+                    Reset your password
+                </h2>
+                <form action="javascript:void(0);" id="passchange">
+                    <div class="input-container">
+                        <input required name="username" id="passchangeusername" >
+                        <label for="passchangeusername">Username or email</label>
+                    </div>
+                    <div class="input-container">
+                        <input required name="email" id="passchangemail" type="email">
+                        <label for="passchangemail">Email</label>
+                    </div>
+                    <button type="submit" name="submitpasschange">
+                        Send reset invitation
+                    </button>
+                </form>
+            </div>
             <div class="login current">
                 <picture>
                     <img src="/img/logo.png" alt="Logo">
@@ -42,13 +58,13 @@
                     <div class="input-container">
                         <input required name="password" id="password" type="password">
                         <label for="password">Password</label>
-                        <button type="button" class="view-button"></button>
+                        <button type="button" class="view-button" aria-label="view-password"></button>
                     </div>
                     <a href="#" title="Change your password" class="previous">
                         Forgot password ?
                     </a>
 
-                    <button type="submit">
+                    <button type="submit" name="submitlogin">
                         Login
                     </button>
                     <a href="#" title="Create account" class="next">
@@ -66,16 +82,16 @@
                     <div class="input-container">
                         <input required name="password" id="sign-password" type="password">
                         <label for="sign-password">Password</label>
-                        <button type="button" class="view-button"></button>
+                        <button type="button" class="view-button" aria-label="view-password1"></button>
                     </div>
 
                     <div class="input-container">
                         <input required name="password-2" id="sign-password-2" type="password">
                         <label for="sign-password-2">Repeat password</label>
-                        <button type="button" class="view-button"></button>
+                        <button type="button" class="view-button" aria-label="view-password2"></button>
                     </div>
 
-                    <button type="submit" title="Next step" class="next">
+                    <button type="submit" title="Next step" class="next" name="submitsignup1">
                         Next
                     </button>
                 </form>
@@ -99,7 +115,7 @@
                         Previous
                     </a>
 
-                    <button type="submit" title="Next step" class="next">
+                    <button type="submit" title="Next step" class="next" name="submitsignup2">
                         Next
                     </button>
                 </form>
@@ -111,12 +127,16 @@
                         <input name="birthdate" id="birthdate" type="date">
                         <label for="birthdate">Birthdate</label>
                     </div>
-                    <textarea>Some words about your favorite juice...</textarea>
+                    <div class="input-container">
+                        <textarea id="more" placeholder="Some words about your favorite juice..."></textarea>
+                        <label for="more">Orange juice above all</label>
+                    </div>
+
                     <a title="Previous step" class="previous btn">
                         Previous
                     </a>
 
-                    <button type="submit" title="Create your account">
+                    <button type="submit" title="Create your account" name="submitsignup3">
                         Sign up
                     </button>
                 </form>

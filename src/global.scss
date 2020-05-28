@@ -3,6 +3,10 @@ $blue: #007ec3;
 $yellow: #edff81;
 $orange: #e49800;
 
+::selection {
+  background-color: #fff;
+}
+
 body {
   color: $white;
   background-color: $blue;
@@ -44,16 +48,9 @@ body {
     width: 100%;
     padding: 20px;
     .container {
-      position: relative;
       text-align: center;
         picture {
         width: 80px;
-      }
-      .back {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
       }
      }
     &.show {
@@ -76,6 +73,7 @@ body {
       width: 100%;
       color: #fff;
       display: none;
+      margin-bottom: 20px;
       &.show {
         display: block;
       }
@@ -97,7 +95,7 @@ body {
           transition: 0.5s ease-in-out;
           padding: 0 40px;
           opacity: 0;
-          transform: translateX(-100%);
+          transform: translateX(-200%); //first position
 
           &.current {
             opacity: 1;
@@ -132,7 +130,7 @@ body {
                 pointer-events: none;
               }
 
-              input {
+              input, textarea {
                 width: 100%;
                 &:focus, &.filled {
                   + label {
@@ -150,6 +148,23 @@ body {
                 }
               }
 
+              textarea {
+                font-family: inherit;
+                font-size: inherit;
+                &::placeholder {
+                  color: #ffffff00;
+                  font-size: 0px;
+                }
+                &:focus {
+                  &::placeholder {
+                    color: $white;
+                    font-size: inherit;
+                  }
+
+                }
+
+              }
+
               .view-button {
                 position: absolute;
                 right: 0px;
@@ -163,11 +178,27 @@ body {
               border: 1px solid $white;
               padding: 10px 15px;
               color: $white;
+              transition: 0.2s;
+              &:focus {
+                background: #0072ae;
+              }
+              &[type=date]{
+                cursor: pointer;
+                color: #ffffff00;
+                &:focus, &.filled {
+                  color: $white;
+                }
+              }
             }
-
-            textarea {
-              width: 100%;
-              color: $white;
+            input, button, textarea {
+              &:focus {
+                outline: none;
+              }
+            }
+            input {
+              &.wrong {
+                border-left: 4px solid $orange;
+              }
             }
 
             .btn, button {
@@ -231,12 +262,22 @@ body {
       height: 10px;
       display: block;
       border-radius: 100%;
+      transition: 0.2s;
       &:not(:last-child){
         margin-bottom: 10px;
       }
       &.current {
         opacity: 0.5;
         cursor: unset;
+      }
+
+      &.wrong {
+        background-color: $orange;
+        opacity: 1;
+      }
+      &.right {
+        background-color: #00ff3e;
+        opacity: 1;
       }
     }
     &.show {
