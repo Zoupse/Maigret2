@@ -183,6 +183,13 @@ document.querySelectorAll('.view-button').forEach((obj)=>{
     obj.addEventListener('mouseup',()=>{
         changePasswordView(obj);
     });
+    // for touchable screens
+    obj.addEventListener('touchstart',()=>{
+        changePasswordView(obj);
+    });
+    obj.addEventListener('touchend',()=>{
+        changePasswordView(obj);
+    });
 });
 
 //previous
