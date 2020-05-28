@@ -115,13 +115,11 @@ const slide = (move, step) => {
     console.log(currentel);
 
     //navbar
-    if (currentel.classList.contains('login')){
-        document.querySelector("nav").classList.remove('show');
+    if (!currentel.classList.contains('login')){
+        document.querySelector("nav").classList.add('show');
     }
     else {
-        document.querySelector("nav").classList.add('show');
-        //console.log("ok");
-       // console.log(document.querySelector("nav"));
+        document.querySelector("nav").classList.remove('show');
     }
 
     //aside
@@ -133,7 +131,7 @@ const slide = (move, step) => {
         document.querySelector('aside > a:nth-child('+i+')').classList.add('current');
     }
     else {
-        document.querySelector("nav").classList.remove('show');
+        document.querySelector("aside").classList.remove('show');
     }
 }
 
