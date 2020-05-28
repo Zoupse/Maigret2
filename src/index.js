@@ -130,6 +130,9 @@ let current = 3; //nth child of the first wanted slide
 
 const slide = (move, step) => {
 
+    //remove eventual alert
+    document.querySelector("#alert").classList.remove("show");
+
     //move all
     translate += move;
     document.querySelectorAll('.slider > div').forEach((el) => {
@@ -253,7 +256,7 @@ document.querySelectorAll('.next').forEach((obj)=>{
     obj.addEventListener('click',()=>{
         if(obj.type == "submit") { //specific action for submit type
             setTimeout(() => { //longer timeout than function wich handle submit action
-                if(!alert.classList.contains("show") && !obj.parentElement.querySelector("input:invalid")) { //every thing is ok
+                if(!alert.classList.contains("show") && !obj.parentElement.parentElement.querySelector("input:invalid")) { //every thing is ok
                     if(document.querySelector("aside").classList.contains("show")) {
                         let point = document.querySelector("aside .current");
                         point.classList.remove("wrong");
@@ -279,8 +282,6 @@ document.querySelectorAll('.next').forEach((obj)=>{
 //aside
 document.querySelectorAll('aside > a').forEach((obj)=>{
     obj.addEventListener('click',()=>{
-        //remove eventual alert
-        document.querySelector("#alert").classList.remove("show");
         //find node index
         let node = obj;
         let i = 1;
