@@ -52,11 +52,11 @@ const processDataForm = (data, id) => {
     switch (id) {
         case 'loginForm':
             if (data.get('password') !== password || data.get('username') !== username) {
-                alert.innerHTML = "Wrong username or password";
-                alert.classList.add("show");
+                alert.innerHTML = "<span>Wrong username or password</span>";
+                alert.classList.add("show","wrong");
             }
             else {
-                alert.classList.remove("show");
+                alert.classList.remove("show","wrong");
                 translate = 0;
                 current =  1;
                 //then operate the slide with above function
@@ -65,14 +65,14 @@ const processDataForm = (data, id) => {
             break;
         case 'signup1':
             if (data.get('password') !== data.get('password-2')) {
-                alert.innerHTML = "Password fields are not the same";
-                alert.classList.add("show");
+                alert.innerHTML = "<span>Password fields are not the same</span>";
+                alert.classList.add("show","wrong");
                 document.querySelectorAll("#signup1 input[type=password]").forEach((obj)=>{
                     obj.classList.add("wrong");
                 });
             }
             else {
-                alert.classList.remove("show");
+                alert.classList.remove("show","wrong");
                 document.querySelectorAll("#signup1 input[type=password]").forEach((obj)=>{
                     obj.classList.remove("wrong");
                 });
@@ -90,12 +90,19 @@ const processDataForm = (data, id) => {
                document.querySelectorAll(".signup input:invalid").forEach((obj)=>{
                    obj.classList.add("wrong");
                });
-               alert.innerHTML = "Oops. Looks like you forgot something. Please submit each step.";
-               alert.classList.add("show");
+               alert.innerHTML = "<span>Oops. Looks like you forgot something. Please submit each step.</span>";
+               alert.classList.add("show","wrong");
            }
            else {
                slide(-100, +1);
+               alert.innerHTML = "<span>Your account has been created.</span>";
+               alert.classList.add("show","right");
            }
+            break;
+
+        case 'passchange':
+            alert.innerHTML = "<span>Check your mailbox to reset your password.</span>";
+            alert.classList.add("show","right");
             break;
 
     }
@@ -134,7 +141,7 @@ let current = 3; //nth child of the first wanted slide
 const slide = (move, step) => {
 
     //remove eventual alert
-    document.querySelector("#alert").classList.remove("show");
+    document.querySelector("#alert").classList.remove("show", "wrong", "right");
 
     //move all
     translate += move;
@@ -259,7 +266,7 @@ document.querySelectorAll('.next').forEach((obj)=>{
     obj.addEventListener('click',()=>{
         if(obj.type == "submit") { //specific action for submit type
             setTimeout(() => { //longer timeout than function wich handle submit action
-                if(!alert.classList.contains("show") && !obj.parentElement.parentElement.querySelector("input:invalid")) { //every thing is ok
+                if(!alert.classList.contains("wrong") && !obj.parentElement.parentElement.querySelector("input:invalid")) { //every thing is ok
                     if(document.querySelector("aside").classList.contains("show")) {
                         let point = document.querySelector("aside .current");
                         point.classList.remove("wrong");
@@ -267,7 +274,7 @@ document.querySelectorAll('.next').forEach((obj)=>{
                     }
                     slide(-100, +1);
                 }
-                else if(alert.classList.contains("show")) { //something's wrong
+                else if(alert.classList.contains("wrong")) { //something's wrong
                     if(document.querySelector("aside").classList.contains("show")) {
                         let point = document.querySelector("aside .current");
                         point.classList.add("wrong");

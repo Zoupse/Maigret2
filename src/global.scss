@@ -2,6 +2,7 @@ $white: #fff;
 $blue: #007ec3;
 $yellow: #edff81;
 $orange: #e49800;
+$green: #09d73b;
 
 ::selection {
   background-color: #fff;
@@ -34,6 +35,10 @@ body {
   a, .previous, .next{
     color: $white;
     text-decoration: none;
+  }
+
+  p {
+    line-height: 150%;
   }
 
   .pagination {
@@ -78,7 +83,6 @@ body {
     text-transform: uppercase;
     font-size: 15px;
     font-weight: bold;
-    background: $orange;
     padding: 20px;
     width: 100%;
     color: #fff;
@@ -89,6 +93,15 @@ body {
     opacity: 0;
     text-align: center;
     height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.wrong {
+      background: $orange;
+    }
+    &.right {
+      background: $green;
+    }
     &.show {
       transform: translateY(0);
       opacity: 1;
@@ -252,51 +265,41 @@ body {
               }
             }
 
-            .btn, button {
-              &:not(.next){
-                text-transform: uppercase;
-                border: none;
-                font-weight: 700;
-                font-family: 'Montserrat', sans-serif;
-                cursor: pointer;
-
-                &:not(.view-button) {
-                  padding: 10px 15px;
-                  background: $white;
-                  color: $blue;
-                  border-radius: 50px;
-                }
-
-                &.view-button {
-                  padding: 0 20px;
-                  width: 15px;
-                  height: 100%;
-                  background-color: unset;
-                  background-image: url("/img/eye.png");
-                  background-position: center;
-                  background-repeat: no-repeat;
-                  box-sizing: content-box;
-                }
-              }
-
-            }
-
-            > button {
-              width: 100%;
-            }
-
             a {
               display: block;
               text-align: right;
             }
           }
+          .btn, button {
+            &:not(.next){
+              text-transform: uppercase;
+              border: none;
+              font-weight: 700;
+              font-family: 'Montserrat', sans-serif;
+              cursor: pointer;
+              width: 100%;
+
+              &:not(.view-button) {
+                padding: 10px 15px;
+                background: $white;
+                color: $blue;
+                border-radius: 50px;
+              }
+
+              &.view-button {
+                padding: 0 20px;
+                width: 15px;
+                height: 100%;
+                background-color: unset;
+                background-image: url("/img/eye.png");
+                background-position: center;
+                background-repeat: no-repeat;
+                box-sizing: content-box;
+              }
+            }
+
+          }
         }
-
-
-        .static {
-          position: static;
-        }
-
       }
     }
 
@@ -327,7 +330,7 @@ body {
         opacity: 1;
       }
       &.right {
-        background-color: #00ff3e;
+        background-color: $green;
         opacity: 1;
       }
     }
