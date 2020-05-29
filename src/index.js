@@ -90,8 +90,11 @@ const processDataForm = (data, id) => {
                document.querySelectorAll(".signup input:invalid").forEach((obj)=>{
                    obj.classList.add("wrong");
                });
-               alert.innerHTML = "Oops. Looks like you forgot something.";
+               alert.innerHTML = "Oops. Looks like you forgot something. Please submit each step.";
                alert.classList.add("show");
+           }
+           else {
+               slide(-100, +1);
            }
             break;
 
@@ -271,7 +274,7 @@ document.querySelectorAll('.next').forEach((obj)=>{
                         point.classList.remove("right");
                     }
                 }
-            }, loadtime + 1);
+            }, loadtime + 100);
         }
         else { //common action
             slide(-100, +1);
